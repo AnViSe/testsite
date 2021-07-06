@@ -1,3 +1,4 @@
+#! python.exe -u
 """
 WSGI config for mysite project.
 

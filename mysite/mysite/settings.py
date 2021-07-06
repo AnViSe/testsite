@@ -78,7 +78,15 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    },
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.oracle',
+    #     'NAME': 'ORCL',
+    #     'USER': 'QUIZ',
+    #     'PASSWORD': 'quiz_dba',
+    #     'HOST': '172.16.188.140',
+    #     'PORT': '1521',
+    # }
 }
 
 
