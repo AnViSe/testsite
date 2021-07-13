@@ -11,7 +11,9 @@ class News(models.Model):
     is_published = models.BooleanField(default=True, verbose_name='Активно')
     category = models.ForeignKey('Category',
                                  on_delete=models.PROTECT,
-                                 verbose_name='Категория')
+                                 verbose_name='Категория',
+                                 # related_name = 'get_news',
+                                 )
 
     def get_absolute_url(self):
         return reverse('view_news', kwargs={"pk": self.pk})
@@ -22,7 +24,7 @@ class News(models.Model):
     class Meta:
         verbose_name = 'новость'
         verbose_name_plural = 'новости'
-        ordering = ['created_at']
+        ordering = ['-created_at']
 
 
 class Category(models.Model):
