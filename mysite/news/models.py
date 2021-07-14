@@ -14,6 +14,7 @@ class News(models.Model):
                                  verbose_name='Категория',
                                  # related_name = 'get_news',
                                  )
+    views = models.IntegerField(default=0, verbose_name='Просмотров')
 
     def get_absolute_url(self):
         return reverse('view_news', kwargs={"pk": self.pk})
