@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
+    'ckeditor',
+    'ckeditor_uploader',
+    'captcha',
     'news.apps.NewsConfig',
 ]
 
@@ -152,3 +155,17 @@ EMAIL_PORT = 25
 # EMAIL_HOST_PASSWORD = ''
 # EMAIL_USE_TLS = False
 # EMAIL_USE_SSL = False
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        # 'skin': 'moono',
+        'skin': 'moono-dark',
+        # 'skin': 'moono-lisa',
+        # 'skin': 'office2013',
+        # 'toolbar': 'Full',
+        # 'height': 300,
+        # 'width': 300,
+    },
+}

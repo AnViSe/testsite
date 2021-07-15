@@ -10,9 +10,12 @@
         </li>
         {% if request.user.is_superuser %}
         <li class="nav-item">
-          <a class="nav-link" href="#">Админка</a>
+          <a class="nav-link" href="/admin">Админка</a>
         </li>
         {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'contact' %}">Контакты</a>
+        </li>
         {% if request.user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'add_news' %}">Добавить новость</a>

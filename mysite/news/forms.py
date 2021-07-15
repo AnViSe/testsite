@@ -2,6 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+from captcha.fields import CaptchaField
 
 import re
 
@@ -13,6 +14,7 @@ class ContactForm(forms.Form):
                               widget=forms.TextInput(attrs={'class': 'form-control'}))
     content = forms.CharField(label='Текст',
                               widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
+    captcha = CaptchaField()
 
 
 class UserRegisterForm(UserCreationForm):
