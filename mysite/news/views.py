@@ -5,9 +5,10 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.contrib.auth import login, logout
+from django.core.mail import send_mail
 
 from .models import News, Category
-from .forms import NewsForm, UserRegisterForm, UserLoginForm
+from .forms import NewsForm, UserRegisterForm, UserLoginForm, ContactForm
 from .utils import MyMixin
 
 
@@ -43,16 +44,37 @@ def user_logout(request):
     return redirect('home')
 
 
+# def test(request):
+#     objects = [
+#         'john', 'paul', 'george', 'ringo',
+#         'john1', 'paul1', 'george1', 'ringo1',
+#         'john2', 'paul2', 'george2', 'ringo2',
+#     ]
+#     paginator = Paginator(objects, 2)
+#     page_num = request.GET.get('page', 1)
+#     page_objects = paginator.get_page(page_num)
+#     return render(request, 'news/test.html', {'page_obj': page_objects})
+
+
 def test(request):
-    objects = [
-        'john', 'paul', 'george', 'ringo',
-        'john1', 'paul1', 'george1', 'ringo1',
-        'john2', 'paul2', 'george2', 'ringo2',
-    ]
-    paginator = Paginator(objects, 2)
-    page_num = request.GET.get('page', 1)
-    page_objects = paginator.get_page(page_num)
-    return render(request, 'news/test.html', {'page_obj': page_objects})
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            mail = send_mail(form.cleaned_data['subject'],
+                             form.cleaned_data['content'],
+                             'debug@grodno.belpost.by',
+                             ['anvise@grodno.belpost.by'],
+                             fail_silently=True)
+            if mail:
+                messages.success(request, 'Письмо успешно отправлено!')
+                return redirect('test')
+            else:
+                messages.error(request, 'Ошибка отправки')
+        else:
+            messages.error(request, 'Ошибка отправки')
+    else:
+        form = ContactForm()
+    return render(request, 'news/test.html', {"form": form})
 
 
 class HomeNews(MyMixin, ListView):
